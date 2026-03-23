@@ -1,16 +1,19 @@
-# React + Vite
+# Config Generator
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A browser-based tool that generates compatible configuration files for developer projects. Select your tech stack, configure options, preview the output, and download everything as a zip — zero conflicts, no server required.
 
-Currently, two official plugins are available:
+## About
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Getting one config file right is easy. Getting six configs that play nicely together (ESLint knows about Prettier, tsconfig has the right settings for Next.js vs Express, .gitignore matches the stack) is the annoying part developers repeat on every new project. This tool does it in 30 seconds.
 
-## React Compiler
+## Tech Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **React** (Vite) — plain JavaScript, no TypeScript
+- **Tailwind CSS** — utility-first styling
+- **JSZip / FileSaver** — client-side zip generation and download
 
-## Expanding the ESLint configuration
+All logic runs in the browser. No server, no database, no API.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Status
+
+🚧 Under active development
