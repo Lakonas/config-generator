@@ -7,6 +7,17 @@ export function generateTypescript(options, stack) {
     skipLibCheck: true,
     forceConsistentCasingInFileNames: true,
   };
+  if (options.noUnusedLocals) {
+    compilerOptions.noUnusedLocals = true;
+  }
+
+  if (options.noUnusedParameters) {
+    compilerOptions.noUnusedParameters = true;
+  }
+
+  if (options.noFallthroughCasesInSwitch) {
+    compilerOptions.noFallthroughCasesInSwitch = true;
+  }
 
   if (stack.includes('react')) {
     compilerOptions.jsx = 'react-jsx';
