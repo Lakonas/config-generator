@@ -9,6 +9,7 @@ import { generateEditorconfig } from './generators/editorconfig';
 import { generateEnv } from './generators/env';
 import { generateDocker, generateDockerignore } from './generators/docker';
 import { generateJest } from './generators/jest';
+import { downloadConfigBundle } from './utils/zipBuilder';
 
 function App() {
   const [selectedStack, setSelectedStack] = useState([]);
@@ -88,6 +89,22 @@ function App() {
           </button>
         ))}
       </div>
+      <button
+        onClick={() => downloadConfigBundle(generatedFiles)}
+        disabled={generatedFiles.length <= 2}
+        style={{
+          marginTop: '16px',
+          padding: '10px 20px',
+          background: generatedFiles.length <= 2 ? '#9ca3af' : '#2563eb',
+          color: 'white',
+          border: 'none',
+          borderRadius: '4px',
+          cursor: generatedFiles.length <= 2 ? 'not-allowed' : 'pointer',
+          fontSize: '16px',
+        }}
+      >
+        Download Config Bundle
+      </button>
       <div>
         {generatedFiles.map((file) => (
           <div key={file.name} style={{ marginTop: '16px' }}>
