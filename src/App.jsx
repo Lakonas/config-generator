@@ -10,6 +10,9 @@ import { generateEnv } from './generators/env';
 import { generateDocker, generateDockerignore } from './generators/docker';
 import { generateJest } from './generators/jest';
 import { downloadConfigBundle } from './utils/zipBuilder';
+import Header from './components/Header';
+import StackSelector from './components/StackSelector';
+import ConfigPanel from './components/ConfigPanel';
 
 function App() {
   const [selectedStack, setSelectedStack] = useState([]);
@@ -41,6 +44,7 @@ function App() {
       },
     }));
   };
+
   const generatedFiles = [];
 
   if (selectedStack.includes('prettier')) {
@@ -53,8 +57,7 @@ function App() {
     generatedFiles.push({ name: 'tsconfig.json', content: generateTypescript(configOptions.typescript, selectedStack) });
   }
   if (selectedStack.includes('editorconfig')) {
-    const prettierOpts = selectedStack.includes('prettier') ? configOptions.prettier : null;
-    generatedFiles.push({ name: '.editorconfig', content: generateEditorconfig(configOptions.editorconfig, prettierOpts) });
+    generatedFiles.push({ name: '.editorconfig', content: generateEditorconfig(configOptions.editorconfig, selectedStack.includes('prettier') ? configOptions.prettier : null) });
   }
   if (selectedStack.includes('docker')) {
     generatedFiles.push({ name: 'Dockerfile', content: generateDocker(configOptions.docker, selectedStack) });
@@ -66,56 +69,22 @@ function App() {
 
   generatedFiles.push({ name: '.gitignore', content: generateGitignore(selectedStack) });
   generatedFiles.push({ name: '.env.example', content: generateEnv(selectedStack) });
+
+  const canDownload = generatedFiles.length > 2;
+
   return (
     <div>
-      <h1>Config Generator</h1>
-      <p>Selected: {selectedStack.join(', ') || 'none'}</p>
-      <div>
-        {stackItems.map((item) => (
-          <button
-            key={item.id}
-            onClick={() => toggleStack(item.id)}
-            style={{
-              margin: '4px',
-              padding: '8px',
-              background: selectedStack.includes(item.id) ? '#2563eb' : '#e5e7eb',
-              color: selectedStack.includes(item.id) ? 'white' : 'black',
-              border: 'none',
-              borderRadius: '4px',
-              cursor: 'pointer',
-            }}
-          >
-            {item.name}
-          </button>
-        ))}
-      </div>
-      <button
-        onClick={() => downloadConfigBundle(generatedFiles)}
-        disabled={generatedFiles.length <= 2}
-        style={{
-          marginTop: '16px',
-          padding: '10px 20px',
-          background: generatedFiles.length <= 2 ? '#9ca3af' : '#2563eb',
-          color: 'white',
-          border: 'none',
-          borderRadius: '4px',
-          cursor: generatedFiles.length <= 2 ? 'not-allowed' : 'pointer',
-          fontSize: '16px',
-        }}
-      >
-        Download Config Bundle
-      </button>
-      <div>
-        {generatedFiles.map((file) => (
-          <div key={file.name} style={{ marginTop: '16px' }}>
-            <h3>{file.name}</h3>
-            <pre style={{ background: '#f3f4f6', padding: '12px', borderRadius: '4px', overflow: 'auto' }}>
-              {file.content}
-            </pre>
-          </div>
-        ))}
-      </div>
+      <Header
+        onDownload={() => downloadConfigBundle(generatedFiles)}
+        canDownload={canDownload}
+      />
+      <StackSelector
+        selectedStack={selectedStack}
+        onToggle={toggleStack}
+      />
+      <ConfigPanel generatedFiles={generatedFiles} />
     </div>
   );
 }
+
 export default App;
