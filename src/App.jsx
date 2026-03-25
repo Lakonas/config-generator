@@ -82,7 +82,11 @@ function App() {
         selectedStack={selectedStack}
         onToggle={toggleStack}
       />
-      <ConfigPanel generatedFiles={generatedFiles} />
+     <ConfigPanel
+        generatedFiles={generatedFiles}
+        configOptions={configOptions}
+        onUpdateOption={updateOption}
+      />
     </div>
   );
 }
