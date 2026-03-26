@@ -1,11 +1,8 @@
-function CodePreview({ fileName, content }) {
+function CodePreview({ content }) {
   return (
-    <div>
-      <h3>{fileName}</h3>
-      <pre>
-        <code>{content}</code>
-      </pre>
-    </div>
+    <pre className="text-xs font-mono text-gray-800 whitespace-pre-wrap leading-relaxed">
+      <code>{content}</code>
+    </pre>
   );
 }
 

@@ -3,11 +3,11 @@ import StackCard from './StackCard';
 
 function StackSelector({ selectedStack, onToggle }) {
   return (
-    <section>
+    <section className="mb-8">
       {categories.map((category) => (
-        <div key={category}>
-          <h2>{category}</h2>
-          <div>
+        <div key={category} className="mb-4">
+          <h2 className="text-xs font-medium text-gray-500 uppercase tracking-wide mb-2">{category}</h2>
+          <div className="flex flex-wrap gap-2">
             {stackItems
               .filter((item) => item.category === category)
               .map((item) => (

@@ -73,11 +73,12 @@ function App() {
   const canDownload = generatedFiles.length > 2;
 
   return (
-    <div>
+    <div className="min-h-screen bg-gray-100">
       <Header
         onDownload={() => downloadConfigBundle(generatedFiles)}
         canDownload={canDownload}
       />
+      <main className="max-w-5xl mx-auto px-4 py-8">
       <StackSelector
         selectedStack={selectedStack}
         onToggle={toggleStack}
@@ -87,6 +88,7 @@ function App() {
         configOptions={configOptions}
         onUpdateOption={updateOption}
       />
+      </main>
     </div>
   );
 }
