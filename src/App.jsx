@@ -13,6 +13,7 @@ import { downloadConfigBundle } from './utils/zipBuilder';
 import Header from './components/Header';
 import StackSelector from './components/StackSelector';
 import ConfigPanel from './components/ConfigPanel';
+import FolderTree from './components/FolderTree';
 
 function App() {
   const [selectedStack, setSelectedStack] = useState([]);
@@ -88,6 +89,7 @@ function App() {
         configOptions={configOptions}
         onUpdateOption={updateOption}
       />
+      <FolderTree generatedFiles={generatedFiles} />
       </main>
     </div>
   );
