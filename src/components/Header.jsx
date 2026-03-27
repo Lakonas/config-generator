@@ -1,21 +1,21 @@
 function Header({ onDownload, canDownload }) {
   return (
-    <header className="bg-white border-b border-gray-200 px-4 py-4">
+    <header className="bg-gray-900 px-4 py-6">
       <div className="max-w-5xl mx-auto flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Config Generator</h1>
-          <p className="text-sm text-gray-500">Zero-conflict project configs in 30 seconds</p>
+          <h1 className="text-2xl font-bold text-white">Config Generator</h1>
+          <p className="text-sm text-gray-400 mt-1">Zero-conflict project configs in 30 seconds</p>
         </div>
         <button
           onClick={onDownload}
           disabled={!canDownload}
-          className={`px-5 py-2 rounded-lg text-sm font-medium text-white transition-colors ${
+          className={`px-5 py-2.5 rounded-lg text-sm font-medium transition-all ${
             canDownload
-              ? 'bg-blue-600 hover:bg-blue-700 cursor-pointer'
-              : 'bg-gray-300 cursor-not-allowed'
+              ? 'bg-blue-500 hover:bg-blue-400 text-white cursor-pointer shadow-sm'
+              : 'bg-gray-700 text-gray-500 cursor-not-allowed'
           }`}
         >
-          Download Config Bundle
+          ↓ Download Bundle
         </button>
       </div>
     </header>
